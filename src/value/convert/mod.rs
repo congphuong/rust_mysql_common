@@ -6,7 +6,6 @@
 // option. All files in the project carrying such notice may not be copied,
 // modified, or distributed except according to those terms.
 
-use ::chrono::format;
 use btoi::{btoi, btou};
 use num_traits::ToPrimitive;
 use regex::bytes::Regex;
