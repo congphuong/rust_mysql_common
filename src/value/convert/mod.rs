@@ -392,9 +392,9 @@ impl TryFrom<Value> for String {
 
     fn try_from(v: Value) -> Result<Self, Self::Error> {
         match v {
-            Value::Bytes(bytes) => match String::from_utf8(bytes) {
+            Value::Bytes(bytes) => match String::from_utf8(bytes.clone()) {
                 Ok(x) => Ok(x),
-                Err(e) => Err(FromValueError(Value::Bytes(e.into_bytes()))),
+                Err(_) => Ok(String::from_utf8_lossy(&bytes).to_string()),
             },
             v => Err(FromValueError(v)),
         }
