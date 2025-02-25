@@ -86,7 +86,7 @@ strip = "debuginfo"
 incremental = false
 
 [features]
-default = ["flate2/zlib", "derive"]
+default = ["flate2/zlib", "derive", "chrono"]
 test = ["derive", "time", "bindgen"]
 derive = ["mysql-common-derive"]
 binlog = ["bitvec"]
