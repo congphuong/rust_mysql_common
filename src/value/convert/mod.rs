@@ -6,6 +6,7 @@
 // option. All files in the project carrying such notice may not be copied,
 // modified, or distributed except according to those terms.
 
+use ::chrono::format;
 use btoi::{btoi, btou};
 use num_traits::ToPrimitive;
 use regex::bytes::Regex;
@@ -394,7 +395,13 @@ impl TryFrom<Value> for String {
         match v {
             Value::Bytes(bytes) => match String::from_utf8(bytes.clone()) {
                 Ok(x) => Ok(x),
-                Err(_) => Ok(String::from_utf8_lossy(&bytes).to_string()),
+                Err(_) => {
+                    let hex = bytes
+                        .iter()
+                        .map(|b| format!("{:02X}", b))
+                        .collect::<String>();
+                    Ok(hex)
+                }
             },
             v => Err(FromValueError(v)),
         }
